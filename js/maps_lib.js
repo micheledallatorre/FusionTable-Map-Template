@@ -71,6 +71,21 @@
         $("#result_box").hide();
 
         //-----custom initializers-----
+		$("#price-slider").slider({
+    orientation: "horizontal",
+    range: true,
+    min: 0,
+    max: 1000,
+    values: [0, 200],
+    step: 10,
+    slide: function (event, ui) {
+        $("#price-selected-start").html(ui.values[0]);
+        $("#price-selected-end").html(ui.values[1]);
+    },
+    stop: function(event, ui) {
+      self.doSearch();
+    }
+});
         //-----end of custom initializers-----
 
         //run the default search when page loads
@@ -94,11 +109,13 @@
                 where: whereClause
             },
             styleId: 2,
-            templateId: 2
+			// MDT: updated to fit my custom tooltip set in Fusion Tables
+            templateId: 3
         });
         self.fusionTable = self.searchrecords;
         self.searchrecords.setMap(map);
         self.getCount(whereClause);
+		self.getList(whereClause);
     };
 
 
@@ -134,6 +151,7 @@
                     else self.map.setZoom(17);
 
                     if (self.addrMarkerImage != '') {
+						console.log(self);
                         self.addrMarker = new google.maps.Marker({
                             position: self.currentPinpoint,
                             map: self.map,
@@ -163,6 +181,8 @@
         self.whereClause = self.locationColumn + " not equal to ''";
         
         //-----custom filters-----
+		self.whereClause += " AND 'Prezzo' >= '" + $("#price-selected-start").html() + "'";
+		self.whereClause += " AND 'Prezzo' <= '" + $("#price-selected-end").html() + "'";
         //-----end of custom filters-----
 
         self.getgeoCondition(address, function (geoCondition) {
@@ -298,6 +318,54 @@
         });
         $("#result_box").fadeIn();
     };
+	
+	 MapsLib.prototype.getList = function(whereClause) {
+    var self = this;
+    var selectColumns = 'Nome, Foto, Indirizzo, Posti, Prezzo ';
+
+    self.query({ 
+      select: selectColumns, 
+      where: whereClause 
+    }, function(response) { 
+      self.displayList(response);
+    });
+  },
+
+  MapsLib.prototype.displayList = function(json) {
+    var self = this;
+
+    var data = json['rows'];
+    var template = '';
+
+    var results = $('#results_list');
+    results.hide().empty(); //hide the existing list and empty it out first
+
+    if (data == null) {
+      //clear results list
+      results.append("<li><span class='lead'>No results found</span></li>");
+    }
+    else {
+      for (var row in data) {
+        template = "\
+          <div class='row-fluid item-list'>\
+            <div class='span12'>\
+              <strong>" + data[row][0] + "</strong>\
+              <br />\
+              <img src=\"" + data[row][1] + "\" height=\"100px\">\
+              <br />\
+              " + data[row][2] + "\
+              <br />\
+              Posti disponibili: " + data[row][3] + "\
+			  <br />\
+			  Prezzo: " + data[row][4] + "€\
+            </div>\
+          </div><hr>";
+        results.append(template);
+      }
+    }
+    results.fadeIn();
+  },
+	
 
     MapsLib.prototype.addCommas = function (nStr) {
         nStr += '';

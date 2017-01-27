@@ -13,6 +13,7 @@
     <!--[if lt IE 9]>
       <script type="text/javascript" src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css"/>
   </head>
   <body>
     <div class='navbar navbar-default navbar-static-top'>
@@ -38,6 +39,18 @@
         <div class='col-md-4'>
           <p>This is a demo of <a href='http://derekeder.com'>Derek Eder's</a> <a href='http://derekeder.com/searchable_map_template/'>Searchable Map Template</a> using Google <a href='http://support.google.com/fusiontables/answer/2571232?hl=en&ref_topic=1652595'>Fusion Tables</a>. Use this section to give a little context to your map.</p>
           <div class='well'>
+		  <h4>
+  Price
+  <small>
+    <span id='price-selected-start'>0</span>
+    -
+    <span id='price-selected-end'>1000</span>
+  </small>
+
+<div id='price-slider'></div>
+<span class='pull-left'>0</span>
+<span class='pull-right'>1000</span>
+</h4>
             <h4>
               Address <small>(<a id='find_me' href='#'>find me</a>)</small>
             </h4>
@@ -87,6 +100,9 @@
             </a>
           </div>
           <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
+		  <div class='well'>
+  <div id='results_list'></div>
+</div>
         </div>
         <div class='col-md-8'>
           <noscript>
@@ -104,9 +120,10 @@
     </div>
 
     <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/jquery.address.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAR5eeFETe-sMigouZtPABzHpyA02MGyjQ"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyBukd7wd2LMoD4ynITIYn0C09-Fhz5O-x8"></script>
     <script type="text/javascript" src="js/maps_lib.js"></script>
     <script type='text/javascript'>
       //<![CDATA[
@@ -119,11 +136,12 @@
         
         $(function() {
           var myMap = new MapsLib({
-            fusionTableId:      "1m4Ez9xyTGfY2CU6O-UgEcPzlS0rnzLU93e4Faa0",
-            googleApiKey:       "AIzaSyA3FQFrNr5W2OEVmuENqhb2MBB2JabdaOY",
-            locationColumn:     "geometry",
-            map_center:         [41.8781136, -87.66677856445312],
-            locationScope:      "chicago"
+            fusionTableId:      "1I2oqVOPjWjW7VpTF3nXQmrnyca7XRR2eklEuOTxU",
+            googleApiKey:       "AIzaSyAjP4DkU3FE2NLwynr-ibh7eZL84qRXo5s",
+            locationColumn:     "Indirizzo",
+            map_center:         [46.074779, 11.121749],
+            locationScope:      "italy",
+			defaultZoom: 13
           });
 
           var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'));
