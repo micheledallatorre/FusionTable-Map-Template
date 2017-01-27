@@ -1,8 +1,22 @@
-# Test by Michele Dalla Torre
+# INFO by Michele Dalla Torre
 I forked the project and created this test adding some price filters and a list of all locations.
+
 You can see the site live at [micheledallatorre.github.io/FusionTable-Map-Template/](http://micheledallatorre.github.io/FusionTable-Map-Template/)
 
+## What I did
+1. forked the project from https://github.com/derekeder/FusionTable-Map-Template
+2. updated the project
+3. changed my remote url as follows
+`git remote set-url origin https://github.com/micheledallatorre/FusionTable-Map-Template`
+4. pushed my changes in commit https://github.com/micheledallatorre/FusionTable-Map-Template/commit/8c3401142773fe6de1e87f3c0178101618f20a34
+5. published my updated version at [micheledallatorre.github.io/FusionTable-Map-Template/](http://micheledallatorre.github.io/FusionTable-Map-Template/)
 
+
+
+
+
+
+===
 
 # Fusion Table Searchable Map Template
 You want to put your data on a searchable, filterable map. This is a free, open source template to help you do it.
