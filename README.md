@@ -3,6 +3,10 @@ I forked the project and created this test adding some price filters and a list 
 
 You can see the site live at [micheledallatorre.github.io/FusionTable-Map-Template/](http://micheledallatorre.github.io/FusionTable-Map-Template/)
 
+For reference and ideas see also http://locations.weconnectchicago.org/#/?wifi=1&internet=1&view_mode=map
+
+The Google Fusion Table is publicly available at https://fusiontables.google.com/data?docid=1I2oqVOPjWjW7VpTF3nXQmrnyca7XRR2eklEuOTxU#rows:id=1
+
 ## What I did
 1. forked the project from https://github.com/derekeder/FusionTable-Map-Template
 2. updated the project
